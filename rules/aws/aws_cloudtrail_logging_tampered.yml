@@ -3,6 +3,8 @@ id: 7f3a9c21-8d64-4b52-ae91-6c2f0d8b1e45
 status: experimental
 description: Detects attempts to disable or modify AWS CloudTrail logging configuration.
 author: Kenneth Chinedu
+references:
+  - https://github.com/kennethchinedu/detections/blob/main/runbooks/cloudtrail-logging-tampered.md
 date: 2026-11-14
 
 tags:

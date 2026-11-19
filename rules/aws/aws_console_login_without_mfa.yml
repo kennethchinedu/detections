@@ -7,6 +7,8 @@ description: >
   SSO sign-ins are excluded: they always log MFAUsed No because MFA happens at the identity
   provider, not at AWS sign-in.
 author: Kenneth Chinedu
+references:
+  - https://github.com/kennethchinedu/detections/blob/main/runbooks/console-login-without-mfa.md
 date: 2026-11-15
 
 tags:

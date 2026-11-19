@@ -1,6 +1,7 @@
 # Access key used from a new network
 
-**ATT&CK:** T1078.004 · **Level:** medium · **Runs on:** Athena over an organization CloudTrail
+**ATT&CK:** T1078.004 · **Level:** medium · **Runs on:** Athena over an organization CloudTrail  
+**Runbook:** [access-key-new-network](../runbooks/access-key-new-network.md)
 
 "New" means never seen before, which needs a baseline of past activity. Sigma matches events against fixed
 values and has no memory, so this lives as a scheduled SQL hunt instead of a rule.

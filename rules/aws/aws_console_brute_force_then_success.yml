@@ -58,6 +58,8 @@ description: >
   Five or more failed console sign-ins from one IP, followed by a successful sign-in from the
   same IP within 30 minutes. A guessed or sprayed password that worked.
 author: Kenneth Chinedu
+references:
+  - https://github.com/kennethchinedu/detections/blob/main/runbooks/brute-force-then-success.md
 date: 2026-11-15
 correlation:
   type: temporal_ordered

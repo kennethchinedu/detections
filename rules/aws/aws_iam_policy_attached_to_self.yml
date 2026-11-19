@@ -7,6 +7,8 @@ description: >
   put call are the same user or role. Classic privilege escalation from a stolen identity that
   has iam:Attach*/Put* on itself.
 author: Kenneth Chinedu
+references:
+  - https://github.com/kennethchinedu/detections/blob/main/runbooks/policy-attached-to-self.md
 date: 2026-11-15
 
 tags:

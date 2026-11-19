@@ -20,6 +20,11 @@ checked against real attack techniques run with [Stratus Red Team](https://githu
 | [Shell in application container](rules/falco/pygoat_shell_in_container.yaml) (Falco) | T1059 | warning |
 | [Access key used from a new network](hunts/aws_access_key_new_source.md) (SQL hunt) | T1078.004 | medium |
 
+## Runbooks
+
+Each of the main rules links to a runbook in [`runbooks/`](runbooks/): what the alert means, how to triage it,
+when it's benign, when to escalate, and how to contain it.
+
 ## Tests
 
 Each tested rule has two events in `tests/fixtures/<rule>/`:
