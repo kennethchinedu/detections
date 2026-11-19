@@ -26,10 +26,7 @@ detection:
     additionalEventData.MFAUsed: 'No'
     responseElements.ConsoleLogin: Success
 
-  filter_sso:
-    userIdentity.arn|contains: 'AWSReservedSSO_'
-
-  condition: selection and not filter_sso
+  condition: selection
 
 falsepositives:
   - A break-glass IAM user deliberately kept without MFA (should not exist; fix the user, not the rule).
