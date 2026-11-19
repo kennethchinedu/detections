@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.venv/
+detected_events.json
+zircolite.log
