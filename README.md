@@ -25,6 +25,17 @@ checked against real attack techniques run with [Stratus Red Team](https://githu
 Each of the main rules links to a runbook in [`runbooks/`](runbooks/): what the alert means, how to triage it,
 when it's benign, when to escalate, and how to contain it.
 
+## Incident response
+
+[`docs/incident/`](docs/incident/) covers what happens once an alert becomes an incident:
+
+- [Severity](docs/incident/severity.md): how to rate an incident, SEV1 to SEV4
+- [Roles](docs/incident/roles.md): IC, ops, comms, scribe, and the IC checklist
+- [Comms](docs/incident/comms.md): internal, customer, exec and regulator updates
+- [Escalation and handover](docs/incident/escalation.md)
+- [Post-mortem template](docs/incident/postmortem-template.md)
+- [What done means](docs/incident/done.md) for an alert and for an incident
+
 ## Tests
 
 Each tested rule has two events in `tests/fixtures/<rule>/`:
