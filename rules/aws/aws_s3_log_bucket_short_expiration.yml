@@ -1,0 +1,28 @@
+title: AWS S3 Log Bucket Short Lifecycle Expiration
+id: 668e64e9-2b9f-4ca8-bd1f-e51c76640a07
+status: experimental
+description: Detects S3 lifecycle rules configured to delete log objects after a short retention period.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+tags:
+  - attack.defense-evasion
+  - attack.t1070
+
+logsource:
+  product: aws
+  service: cloudtrail
+
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName: PutBucketLifecycle
+    requestParameters.LifecycleConfiguration.Rule.Expiration.Days|lt: 30
+
+  condition: selection
+
+falsepositives:
+  - An authorised administrator configuring a short retention period under an approved change.
+  - A legitimate lifecycle policy for temporary, non-audit data.
+
+level: medium

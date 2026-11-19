@@ -1,0 +1,19 @@
+- list: pygoat_allowed_shell_parents
+  items: []
+
+- rule: Shell Spawned In PyGoat Container
+  desc: >
+    A shell (sh, bash, ...) started inside the PyGoat container. The app never runs a shell, so
+    this means someone is executing commands in it: kubectl exec, or an exploited RCE such as
+    PyGoat's command-injection lab.
+  condition: >
+    spawned_process
+    and container
+    and k8s.ns.name = "pygoat"
+    and proc.name in (shell_binaries)
+    and not proc.pname in (pygoat_allowed_shell_parents)
+  output: >
+    Shell in PyGoat container (user=%user.name shell=%proc.name parent=%proc.pname
+    cmdline=%proc.cmdline pod=%k8s.pod.name ns=%k8s.ns.name image=%container.image.repository)
+  priority: WARNING
+  tags: [container, shell, mitre_execution, T1059]

@@ -1,0 +1,77 @@
+title: AWS Console Login Failed
+id: 6dcb5f64-0edd-4d21-b9ad-63e77fa0a217
+name: aws_console_login_failed
+status: experimental
+description: One failed console sign-in. Normal on its own (typos); used only by the correlations below.
+author: Kenneth Chinedu
+date: 2026-11-15
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: signin.amazonaws.com
+    eventName: ConsoleLogin
+    responseElements.ConsoleLogin: Failure
+  condition: selection
+level: low
+---
+title: AWS Console Login Succeeded
+id: 6c8ef6fb-7a8e-4a4d-a0d5-e95e7befdd5e
+name: aws_console_login_succeeded
+status: experimental
+description: One successful console sign-in. Used only by the correlation below.
+author: Kenneth Chinedu
+date: 2026-11-15
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: signin.amazonaws.com
+    eventName: ConsoleLogin
+    responseElements.ConsoleLogin: Success
+  condition: selection
+level: low
+---
+title: AWS Console Many Failed Logins From One IP
+id: f5b19674-fbd1-4785-ab4c-a4c0d71ef438
+name: aws_console_many_failed_logins
+status: experimental
+author: Kenneth Chinedu
+date: 2026-11-15
+correlation:
+  type: event_count
+  rules:
+    - aws_console_login_failed
+  group-by:
+    - sourceIPAddress
+  timespan: 10m
+  condition:
+    gte: 5
+level: medium
+---
+title: AWS Console Brute Force Then Success
+id: e578c58a-9ef2-4e13-acf7-510d13c82a32
+status: experimental
+description: >
+  Five or more failed console sign-ins from one IP, followed by a successful sign-in from the
+  same IP within 30 minutes. A guessed or sprayed password that worked.
+author: Kenneth Chinedu
+date: 2026-11-15
+correlation:
+  type: temporal_ordered
+  rules:
+    - aws_console_many_failed_logins
+    - aws_console_login_succeeded
+  group-by:
+    - sourceIPAddress
+  timespan: 30m
+tags:
+  - attack.credential-access
+  - attack.t1110
+falsepositives:
+  - A user who forgot their password, tried many times, then reset it and signed in (check for
+    a password-reset event between the failures and the success).
+  - Many users behind one office NAT IP; one user's typos plus a colleague's normal login.
+level: high

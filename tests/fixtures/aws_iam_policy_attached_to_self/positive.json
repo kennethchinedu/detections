@@ -1,0 +1,14 @@
+{
+  "eventTime": "2026-11-18T10:02:11Z",
+  "eventSource": "iam.amazonaws.com",
+  "eventName": "AttachUserPolicy",
+  "userIdentity": {
+    "type": "IAMUser",
+    "arn": "arn:aws:iam::123456789012:user/dami",
+    "userName": "dami"
+  },
+  "requestParameters": {
+    "userName": "dami",
+    "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"
+  }
+}

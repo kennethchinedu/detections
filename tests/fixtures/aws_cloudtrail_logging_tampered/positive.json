@@ -1,0 +1,8 @@
+{
+  "eventTime": "2026-11-15T11:58:05Z",
+  "eventSource": "cloudtrail.amazonaws.com",
+  "eventName": "StopLogging",
+  "userIdentity": {
+    "arn": "arn:aws:sts::123456789012:assumed-role/AWSControlTowerExecution/aws-go-sdk-session"
+  }
+}

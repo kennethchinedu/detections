@@ -1,0 +1,17 @@
+exclusions: []
+useless: [null, ""]
+mappings:
+  userIdentity.arn: userIdentity.arn
+  userIdentity.type: userIdentity.type
+  userIdentity.userName: userIdentity.userName
+  userIdentity.sessionContext.sessionIssuer.userName: userIdentity.sessionContext.sessionIssuer.userName
+  requestParameters.name: requestParameters.name
+  requestParameters.userName: requestParameters.userName
+  requestParameters.roleName: requestParameters.roleName
+  requestParameters.policyArn: requestParameters.policyArn
+  additionalEventData.MFAUsed: additionalEventData.MFAUsed
+  responseElements.ConsoleLogin: responseElements.ConsoleLogin
+alias: {}
+split: {}
+transforms_enabled: false
+transforms: {}

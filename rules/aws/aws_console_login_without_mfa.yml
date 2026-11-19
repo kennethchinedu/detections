@@ -1,0 +1,36 @@
+title: AWS Console Login Without MFA
+id: 8525c838-ec2c-4ca3-908c-a08b14000146
+name: aws_console_login_without_mfa
+status: experimental
+description: >
+  Detects a successful AWS console sign-in by an IAM user or root where no MFA was used.
+  SSO sign-ins are excluded: they always log MFAUsed No because MFA happens at the identity
+  provider, not at AWS sign-in.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+tags:
+  - attack.initial-access
+  - attack.t1078.004
+
+logsource:
+  product: aws
+  service: cloudtrail
+
+detection:
+  selection:
+    eventSource: signin.amazonaws.com
+    eventName: ConsoleLogin
+    additionalEventData.MFAUsed: 'No'
+    responseElements.ConsoleLogin: Success
+
+  filter_sso:
+    userIdentity.arn|contains: 'AWSReservedSSO_'
+
+  condition: selection and not filter_sso
+
+falsepositives:
+  - A break-glass IAM user deliberately kept without MFA (should not exist; fix the user, not the rule).
+  - Root sign-in on an account whose root MFA was never set up (fix the account).
+
+level: medium
