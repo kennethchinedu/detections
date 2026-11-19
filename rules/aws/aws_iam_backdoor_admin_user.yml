@@ -1,0 +1,67 @@
+title: AWS IAM User Created
+id: 82ac5778-c3b5-453d-b9c5-0cfdae34285b
+name: aws_iam_user_created
+status: experimental
+description: Detects creation of an IAM user.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+logsource:
+  product: aws
+  service: cloudtrail
+
+detection:
+  selection:
+    eventSource: iam.amazonaws.com
+    eventName: CreateUser
+  condition: selection
+
+level: low
+
+---
+title: AWS IAM Access Key Created
+id: d4dba9d9-0561-4fee-bf52-b3066367a78f
+name: aws_iam_access_key_created
+status: experimental
+description: Detects creation of an IAM access key.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+logsource:
+  product: aws
+  service: cloudtrail
+
+detection:
+  selection:
+    eventSource: iam.amazonaws.com
+    eventName: CreateAccessKey
+  condition: selection
+
+level: low
+
+---
+title: AWS IAM Backdoor Admin User
+id: 73ed1454-009b-483c-bfc7-4a067c73d2b7
+name: aws_iam_backdoor_admin_user
+status: experimental
+description: Detects a caller creating an IAM user, creating an access key, and granting AdministratorAccess within 10 minutes. The shorter window reduces false positives from unrelated administrative activity but may miss slower attacks.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+correlation:
+  type: temporal
+  rules:
+    - aws_iam_user_created
+    - aws_iam_access_key_created
+    - aws_iam_admin_policy_attached
+  group-by:
+    - userIdentity.arn
+  timespan: 10m
+
+tags:
+  - attack.persistence
+  - attack.t1098
+  - attack.persistence
+  - attack.t1136.003
+
+level: critical

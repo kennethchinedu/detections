@@ -1,0 +1,16 @@
+{
+  "eventTime": "2026-11-18T09:14:02Z",
+  "eventSource": "signin.amazonaws.com",
+  "eventName": "ConsoleLogin",
+  "userIdentity": {
+    "type": "IAMUser",
+    "arn": "arn:aws:iam::123456789012:user/dami"
+  },
+  "sourceIPAddress": "203.0.113.24",
+  "additionalEventData": {
+    "MFAUsed": "No"
+  },
+  "responseElements": {
+    "ConsoleLogin": "Success"
+  }
+}

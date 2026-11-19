@@ -1,0 +1,35 @@
+title: AWS IAM AdministratorAccess Policy Attached
+id: 4e47e04e-2a1e-4300-b7df-043d9d50b09a
+name: aws_iam_admin_policy_attached
+status: experimental
+description: Detects AdministratorAccess policies being attached to IAM users, roles, or groups.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+tags:
+  - attack.persistence
+  - attack.t1098
+
+logsource:
+  product: aws
+  service: cloudtrail
+
+detection:
+  selection:
+    eventSource: iam.amazonaws.com
+    eventName:
+      - AttachUserPolicy
+      - AttachRolePolicy
+      - AttachGroupPolicy
+    requestParameters.policyArn|endswith: '/AdministratorAccess'
+
+  filter_services:
+    userIdentity.arn|contains: 'AWSServiceRoleFor'
+
+  condition: selection and not filter_services
+
+falsepositives:
+  - An authorised administrator attaching AdministratorAccess to the ci-apply role during approved AWS estate setup.
+  - Control Tower account enrolment, where AWSControlTowerExecution attaches AdministratorAccess to aws-controltower-AdministratorExecutionRole. This is not filtered because attackers may abuse the same role.
+
+level: high

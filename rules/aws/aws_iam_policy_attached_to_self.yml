@@ -1,0 +1,41 @@
+title: AWS IAM Policy Attached To Self
+id: 1b9e5ca4-98f9-4c81-83ea-bd3b24fbc4c0
+name: aws_iam_policy_attached_to_self
+status: experimental
+description: >
+  Detects an identity granting a policy to itself: the caller and the target of the attach or
+  put call are the same user or role. Classic privilege escalation from a stolen identity that
+  has iam:Attach*/Put* on itself.
+author: Kenneth Chinedu
+date: 2026-11-15
+
+tags:
+  - attack.privilege-escalation
+  - attack.t1098.003
+
+logsource:
+  product: aws
+  service: cloudtrail
+
+detection:
+
+  selection_user:
+    eventSource: iam.amazonaws.com
+    eventName:
+      - AttachUserPolicy
+      - PutUserPolicy
+    requestParameters.userName|fieldref: userIdentity.userName
+
+  selection_role:
+    eventSource: iam.amazonaws.com
+    eventName:
+      - AttachRolePolicy
+      - PutRolePolicy
+    requestParameters.roleName|fieldref: userIdentity.sessionContext.sessionIssuer.userName
+
+  condition: 1 of selection_*
+
+falsepositives:
+  - A pipeline role that manages its own permissions by design (Terraform applying its own role); review it, self-managing roles are themselves a risk.
+
+level: high

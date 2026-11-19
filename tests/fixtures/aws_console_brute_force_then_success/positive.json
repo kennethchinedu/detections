@@ -1,0 +1,80 @@
+[
+  {
+    "eventTime": "2026-11-18T11:00:00Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "arn": "arn:aws:iam::123456789012:user/dami"
+    },
+    "sourceIPAddress": "198.51.100.7",
+    "responseElements": {
+      "ConsoleLogin": "Failure"
+    }
+  },
+  {
+    "eventTime": "2026-11-18T11:01:00Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "arn": "arn:aws:iam::123456789012:user/dami"
+    },
+    "sourceIPAddress": "198.51.100.7",
+    "responseElements": {
+      "ConsoleLogin": "Failure"
+    }
+  },
+  {
+    "eventTime": "2026-11-18T11:02:00Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "arn": "arn:aws:iam::123456789012:user/dami"
+    },
+    "sourceIPAddress": "198.51.100.7",
+    "responseElements": {
+      "ConsoleLogin": "Failure"
+    }
+  },
+  {
+    "eventTime": "2026-11-18T11:03:00Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "arn": "arn:aws:iam::123456789012:user/dami"
+    },
+    "sourceIPAddress": "198.51.100.7",
+    "responseElements": {
+      "ConsoleLogin": "Failure"
+    }
+  },
+  {
+    "eventTime": "2026-11-18T11:04:00Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "arn": "arn:aws:iam::123456789012:user/dami"
+    },
+    "sourceIPAddress": "198.51.100.7",
+    "responseElements": {
+      "ConsoleLogin": "Failure"
+    }
+  },
+  {
+    "eventTime": "2026-11-18T11:07:30Z",
+    "eventSource": "signin.amazonaws.com",
+    "eventName": "ConsoleLogin",
+    "userIdentity": {
+      "type": "IAMUser",
+      "arn": "arn:aws:iam::123456789012:user/dami"
+    },
+    "sourceIPAddress": "198.51.100.7",
+    "responseElements": {
+      "ConsoleLogin": "Success"
+    }
+  }
+]

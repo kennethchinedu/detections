@@ -1,0 +1,31 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  ZIRCOLITE_REF: ff8da3ca058c65ccf3c7d25f9aaa92c4e0388e0f # v4.7.1
+
+jobs:
+  rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+
+      - name: Install Zircolite
+        run: |
+          git clone --quiet https://github.com/wagga40/Zircolite.git "$RUNNER_TEMP/zircolite"
+          git -C "$RUNNER_TEMP/zircolite" checkout --quiet "$ZIRCOLITE_REF"
+          pip install --quiet "$RUNNER_TEMP/zircolite"
+
+      - name: Test rules against fixtures
+        run: python tests/run.py "$RUNNER_TEMP/zircolite"
